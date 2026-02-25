@@ -20,8 +20,7 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                // Forzamos la compilación a Java 8 porque el proyecto es tan antiguo que obliga a usar Java 6 que no es compatible con mi versión del Debian.
-                sh "mvn clean install -Dmaven.compiler.source=1.8 -Dmaven.compiler.target=1.8"
+                sh "mvn clean install"
                 junit '**/target/surefire-reports/*.xml'
             }
         }
