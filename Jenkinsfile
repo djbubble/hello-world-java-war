@@ -21,21 +21,19 @@ pipeline {
         stage('Build & Test') {
             steps {
                 sh "mvn clean install"
-                junit '**/target/surefire-reports/*.xml'
+                // Comentamos esto porque no hay tests en este repo
+                // junit '**/target/surefire-reports/*.xml'
             }
         }
 
-        stage('Mutation Test') {
-            steps {
-                sh "mvn org.pitest:pitest-maven:mutationCoverage"
-            }
-        }
+        // Saltamos Mutation Test por ahora ya que no hay tests que mutar
+        /* stage('Mutation Test') { ... } 
+        */
 
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube USAL') {
-                    // CAMBIO: Añadimos un projectKey único para que aparezca como un proyecto nuevo en Sonar
-                    sh "mvn sonar:sonar -Dsonar.sourceEncoding=UTF-8 -Dsonar.projectKey=hello-world-war-real"
+                    sh "mvn sonar:sonar -Dsonar.projectKey=hello-world-war-real"
                 }
             }
         }
@@ -51,8 +49,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    // CAMBIO: Cambiamos el nombre de la imagen a 'mi-web-final' para distinguirla de la anterior
-                    sh "docker build -t mi-web-final:${env.BUILD_ID} ."
+                    // Usamos el nombre real generado por Maven
                     sh "docker build -t mi-web-final:latest ."
                 }
             }
