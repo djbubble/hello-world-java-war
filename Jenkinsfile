@@ -14,7 +14,7 @@ pipeline {
             steps {
                 sh "git config --global http.sslVerify false"
                 // CAMBIO: Asegúrate de poner la URL de TU FORK de hello-world-java-war
-                git branch: "master", url: "https://github.com/TU_USUARIO/hello-world-java-war.git"
+                git branch: "master", url: "https://github.com/djbubble/hello-world-java-war.git"
             }
         }
 
