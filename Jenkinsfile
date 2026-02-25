@@ -60,10 +60,10 @@ pipeline {
                 configFileProvider([configFile(fileId: 'b3385001-6523-43f3-bc63-8c75e791af1c', variable: 'MAVEN_SETTINGS')]) {
                     sh """
                     mvn deploy:deploy-file -s $MAVEN_SETTINGS \
-                    -Dfile=target/hello-world-war.war \
+                    -Dfile=target/hello-1.0.war \
                     -DrepositoryId=mi-repo-binarios \
                     -Durl=http://host.docker.internal:8081/repository/mi-repo-binarios/ \
-                    -DgroupId=com.scmgalaxy \
+                    -DgroupId=com.boxfuse.samples \
                     -DartifactId=hello-world-war \
                     -Dversion=${env.BUILD_ID} \
                     -Dpackaging=war
