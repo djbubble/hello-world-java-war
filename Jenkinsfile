@@ -38,7 +38,14 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('SonarQube USAL') {
-                    sh "mvn sonar:sonar -Dsonar.projectKey=hello-world-war-real"
+                    sh """
+                    mvn sonar:sonar \
+                    -Dsonar.projectKey=hello-world-war-real \
+                    -Dsonar.projectName='Aplicacion Web USAL - Desarrollo' \
+                    -Dsonar.projectVersion=${env.BUILD_ID} \                        
+                    -Dsonar.language=java \
+                    -Dsonar.sourceEncoding=UTF-8
+                    """
                 }
             }
         }
