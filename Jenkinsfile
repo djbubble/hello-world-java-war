@@ -4,6 +4,11 @@ pipeline {
     agent {
         label 'debian-worker' 
     }
+
+    // Definir la herramienta que configuré en "Global Tool Configuration" para que en lugar de usar el Maven con propia instalación, use el local del Debian.
+    tools {
+        maven 'MAVEN_LOCAL'            // Extraido del snippet -> tool name: 'MAVEN_LOCAL', type: 'maven'
+    }
     
     options {
         timestamps() 
