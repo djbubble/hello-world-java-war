@@ -37,13 +37,13 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                // Añado las credentials en lugar de poner el nombre del servidor directamente para así usar el apartado de Pipeline Syntax con el Snippet.
+                // Usamos el credentialsId que me dio el Snippet
                 withSonarQubeEnv(credentialsId: 'sonar-token-id') {            
                     sh """
                     mvn sonar:sonar \
                     -Dsonar.projectKey=hello-world-war-real \
                     -Dsonar.projectName='Aplicacion Web USAL - Desarrollo' \
-                    -Dsonar.projectVersion=${env.BUILD_ID} \                        
+                    -Dsonar.projectVersion=${env.BUILD_ID} \
                     -Dsonar.language=java \
                     -Dsonar.sourceEncoding=UTF-8
                     """
