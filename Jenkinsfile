@@ -38,7 +38,7 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 // Usamos el credentialsId que me dio el Snippet
-                withSonarQubeEnv(credentialsId: 'sonar-token-id') {            
+                withSonarQubeEnv(installationName: 'SonarQube USAL', credentialsId: 'sonar-token-id') {            
                     sh """
                     mvn sonar:sonar \
                     -Dsonar.projectKey=hello-world-war-real \
