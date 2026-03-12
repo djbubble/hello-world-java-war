@@ -37,7 +37,8 @@ pipeline {
 
         stage('SonarQube analysis') {
             steps {
-                withSonarQubeEnv('SonarQube USAL') {
+                // Añado las credentials en lugar de poner el nombre del servidor directamente para así usar el apartado de Pipeline Syntax con el Snippet.
+                withSonarQubeEnv(credentialsId: 'sonar-token-id) {            
                     sh """
                     mvn sonar:sonar \
                     -Dsonar.projectKey=hello-world-war-real \
